@@ -2,10 +2,15 @@ import React from "react";
 import { 
   Text, 
   View,
+  TextInput,
+  Button,
+  ScrollView,
+  TouchableOpacity,
+  Modal,
   FlatList,
   StatusBar,
   StyleSheet,
-  SafeAreaView,
+  SafeAreaView
 } from "react-native";
 
 const Notes = [
@@ -16,7 +21,7 @@ const Notes = [
 
 export default function Index() {
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
         justifyContent: "center",
@@ -24,6 +29,7 @@ export default function Index() {
       }}
     >
       <Text>Moje Notatki</Text>
-    </View>
+
+    </SafeAreaView>
   );
 }
