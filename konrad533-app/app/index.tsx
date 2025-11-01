@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { Link } from "expo-router";
 import { 
   Text, 
   View,
@@ -25,20 +26,29 @@ interface ApiNote {
 // ];
 
 type NoteItemProps = {
+  id: number;
   title: string;
   body: string;
   // date: string;
 };
 
 // const NoteItem = ({ title, date }: NoteItemProps) => (
-const NoteItem = ({ title, body }: NoteItemProps) => (
-  <TouchableOpacity style={styles.noteItem}>
-    <View>
-      <Text style={styles.noteTitle}>{title}</Text>
-      <Text style={styles.noteBody}>{body.substring(0, 50)}</Text>
-      {/* <Text style={styles.noteDate}>{date}</Text> */}
-    </View>
-  </TouchableOpacity>
+const NoteItem = ({ id, title, body }: NoteItemProps) => (
+  <Link 
+    href={{ 
+      pathname: './note/[id]',
+      params: { id: id, title: title, body: body }, 
+    }} 
+    asChild
+  >
+    <TouchableOpacity style={styles.noteItem}>
+      <View>
+        <Text style={styles.noteTitle}>{title}</Text>
+        <Text style={styles.noteBody}>{body.substring(0, 50)}</Text>
+        {/* <Text style={styles.noteDate}>{date}</Text> */}
+      </View>
+    </TouchableOpacity>
+  </Link>
 );
 
 export default function Index() {
@@ -76,6 +86,7 @@ export default function Index() {
         data={notes}
         renderItem={({ item }) => (
           <NoteItem 
+            id={item.id}
             title={item.title} 
             body={item.body} 
             />
