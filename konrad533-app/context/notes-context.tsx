@@ -17,6 +17,7 @@ interface NotesContext {
     notes: ApiNote[];
     isLoading: boolean;
     addNote: (NewNote: Omit<ApiNote, 'id' | 'userId'>) => void;
+    editNote: (id: number, newTitle: string, newBody: string) => void;
 }
 
 const NotesContext = createContext<NotesContext | undefined>(undefined);
@@ -51,10 +52,19 @@ export function NotesProvider({ children }: PropsWithChildren)  {
         setNotes((prevNotes) => [newNote, ...prevNotes]);
     };
 
+    const editNote = (id: number, newTitle: string, newBody: string) => {
+        setNotes((prevNotes) =>
+            prevNotes.map((note) =>
+                note.id === id ? { ...note, title: newTitle, body: newBody } : note
+            )
+        );
+    }
+
     const value = {
         notes,
         isLoading,
         addNote,
+        editNote,
     };
 
     return <NotesContext.Provider value={value}>{children}</NotesContext.Provider>;
