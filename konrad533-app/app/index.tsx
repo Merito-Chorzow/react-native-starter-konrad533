@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from "react";
+// import React, {useState, useEffect} from "react"; - nie potrzebne
+import React from "react";
 import { Link } from "expo-router";
 import { 
   Text, 
@@ -11,13 +12,14 @@ import {
   SafeAreaView,
   ActivityIndicator,
 } from "react-native";
+import { useNotes, ApiNote } from "@/context/notes-context";
 
-interface ApiNote {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
+// interface ApiNote {
+//   userId: number;
+//   id: number;
+//   title: string;
+//   body: string;
+// }
 
 // const Notes = [
 //   { id: '1', title: 'Notatka testowa 1', date: '28-10-2025' },
@@ -26,25 +28,22 @@ interface ApiNote {
 // ];
 
 type NoteItemProps = {
-  id: number;
-  title: string;
-  body: string;
-  // date: string;
+  note: ApiNote;
 };
 
 // const NoteItem = ({ title, date }: NoteItemProps) => (
-const NoteItem = ({ id, title, body }: NoteItemProps) => (
+const NoteItem = ({ note }: NoteItemProps) => (
   <Link 
     href={{ 
       pathname: './note/[id]',
-      params: { id: id, title: title, body: body }, 
+      params: { id: note.id, title: note.title, body: note.body }, 
     }} 
     asChild
   >
     <TouchableOpacity style={styles.noteItem}>
       <View>
-        <Text style={styles.noteTitle}>{title}</Text>
-        <Text style={styles.noteBody}>{body.substring(0, 50)}</Text>
+        <Text style={styles.noteTitle}>{note.title}</Text>
+        <Text style={styles.noteBody}>{note.body.substring(0, 50)}</Text>
         {/* <Text style={styles.noteDate}>{date}</Text> */}
       </View>
     </TouchableOpacity>
@@ -52,24 +51,25 @@ const NoteItem = ({ id, title, body }: NoteItemProps) => (
 );
 
 export default function Index() {
-  const [notes, setNotes] = useState<ApiNote[]>([]);
-  const [isLoading, setLoading] = useState<boolean>(true);
+  // const [notes, setNotes] = useState<ApiNote[]>([]);
+  // const [isLoading, setLoading] = useState<boolean>(true); - zastępujemy useState i useEffect nowym hookiem useNotes
+  const { notes, isLoading } = useNotes();
 
-  useEffect(() => {
-    const fetchNotes = async () => {
-      try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-        const data: ApiNote[] = await response.json();
-        setNotes(data);
-      } catch (error) {
-        console.error('Error fetching notes:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchNotes = async () => {
+  //     try {
+  //       const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+  //       const data: ApiNote[] = await response.json();
+  //       setNotes(data);
+  //     } catch (error) {
+  //       console.error('Error fetching notes:', error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
     
-    fetchNotes();
-  }, []);
+  //   fetchNotes();
+  // }, []);
 
   if (isLoading) {
     return (
@@ -85,14 +85,9 @@ export default function Index() {
       <FlatList
         data={notes}
         renderItem={({ item }) => (
-          <NoteItem 
-            id={item.id}
-            title={item.title} 
-            body={item.body} 
-            />
+          <NoteItem note={item} />
         )}      
         keyExtractor={(item) => item.id.toString()}
-
         ListHeaderComponent={() => (
           <Text style={styles.headerTitle}>Moje Notatki </Text>
         )}
