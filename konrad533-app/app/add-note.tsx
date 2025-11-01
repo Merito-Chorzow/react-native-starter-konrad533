@@ -18,12 +18,14 @@ export default function AddNoteScreen() {
                 <TextInput 
                     style={styles.input} 
                     placeholder="Wpisz tytuł notatki" 
+                    placeholderTextColor="#888"
                 />
 
                 <Text style={styles.label}>Treść</Text>
                 <TextInput 
                     style={[styles.input, styles.textArea]} 
                     placeholder="Wpisz treść notatki" 
+                    placeholderTextColor="#888"                    
                     multiline
                 />
             </View>
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         paddingHorizontal: 12,
         paddingVertical: 8,
-        borderRadius: 4,
+        borderRadius: 12,
         fontSize: 16,
         borderWidth: 1,
         borderColor: '#ddd',
