@@ -9,9 +9,11 @@ import {
     Alert,
     Button,
     ScrollView,
+    ActivityIndicator,
 } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNotes } from "@/context/notes-context";
+import * as Location from 'expo-location';
 
 export default function AddNoteScreen() {
     const params = useLocalSearchParams();
@@ -25,16 +27,48 @@ export default function AddNoteScreen() {
     const [body, setBody] = useState(noteBody);
     const { addNote, editNote } = useNotes();
 
+    const [location, setLocation] = useState<Location.LocationObject | null>(null);
+    const [isLocationLoading, setLocationLoading] = useState(false);
+
+    const handleGetLocation = async () => {
+        setLocationLoading(true);
+        setLocation(null);
+
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+            Alert.alert('Brak dostępu', 'Pozwól aplikacji na dostęp do lokalizacji aby dodać ją do notatki.');
+            setLocationLoading(false);
+            return;
+        }
+        try {
+            let currentLocation = await Location.getCurrentPositionAsync({ 
+                accuracy: Location.Accuracy.Balanced, 
+            });
+            setLocation(currentLocation);
+        } catch (error) {
+            Alert.alert('Błąd', 'Nie udało się pobrać lokalizacji. Spróbuj ponownie.');
+        } finally {
+            setLocationLoading(false);
+        }
+    };
+
     const handleSaveNote = () => {
         if (!title.trim() || !body.trim()) {
             Alert.alert('Błąd', 'Proszę wypełnić oba pola przed zapisaniem notatki.');
             return
         }
         
+        let finalBody = body;
+        if (location) {
+            if (!finalBody.includes('\n\nLokalizacja:')) {
+                finalBody += `\n\nLokalizacja: ${location.coords.latitude.toFixed(4)}, ${location.coords.longitude.toFixed(4)}`;
+            }
+        }
+
         if (isEditMode) {
-            editNote(Number(noteId), title, body);
+            editNote(Number(noteId), title, finalBody);
         } else {
-            addNote({ title, body });
+            addNote({ title: title, body: finalBody });
         }
         router.back();
     };
@@ -71,6 +105,23 @@ export default function AddNoteScreen() {
                     onChangeText={setBody}                   
                     multiline
                 />
+
+                <View style={styles.locationSection}>
+                    <Button title="Dołącz lokalizację" onPress={handleGetLocation} />
+                    {isLocationLoading && <ActivityIndicator style={styles.locationLoader} />}
+
+                    {location && (
+                        <Text style={styles.locationText}>
+                            Zapisano lokalizację!
+                        </Text>
+                    )}
+
+                    {isEditMode && !location && !isLocationLoading && body.includes('Lokalizacja:') && (
+                        <Text style={styles.locationText}>
+                            Notatka zawiera już lokalizację.
+                        </Text>
+                    )}
+                </View>
             </ScrollView>
         </SafeAreaView>
     );
@@ -102,5 +153,23 @@ const styles = StyleSheet.create({
     textarea: {
         height: 120,
         textAlignVertical: 'top',
+    },
+    locationSection: {
+        marginTop: 24,
+        alignItems: 'flex-start',
+        padding: 10,
+        backgroundColor: '#f9f9f9',
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#eee',
+    },
+    locationText: {
+        marginTop: 10,
+        fontSize: 14,
+        color: 'green',
+        fontWeight: '500',
+    },
+    locationLoader: {
+        marginTop: 10,
     },
 });
