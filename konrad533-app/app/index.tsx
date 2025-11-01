@@ -32,15 +32,17 @@ const NoteItem = ({ title, date }: NoteItemProps) => (
 
 export default function Index() {
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Moje Notatki</Text>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={Notes}
+        renderItem={({ item }) => <NoteItem title={item.title} date={item.date} />}      
+        keyExtractor={(item) => item.id}
 
+        ListHeaderComponent={() => (
+          <Text style={styles.headerTitle}>Moje Notatki </Text>
+        )}
+      />
+      <StatusBar barStyle="dark-content" />
     </SafeAreaView>
   );
 }
@@ -65,5 +67,11 @@ const styles = StyleSheet.create({
   noteTitle:{
     fontSize: 18,
     fontWeight: 'bold',
-  }
+  },
+  headerTitle:{
+    fontSize: 24,
+    fontWeight: 'bold',
+    paddingHorizontal: 16,
+    paddingVertical: 20,
+  },
 });
