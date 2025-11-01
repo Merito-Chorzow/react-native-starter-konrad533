@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "konrad533-app",
+    "name": "Field Notes",
     "slug": "konrad533-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -37,6 +37,13 @@
           "dark": {
             "backgroundColor": "#000000"
           }
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Aplikacja $(PRODUCT_NAME) potrzebuje dostępu do twojej lokalizacji.",
+          "locationWhenInUsePermission": "Aplikacja $(PRODUCT_NAME) potrzebuje dostępu do twojej lokalizacji aby móc ją dodać do notatek."
         }
       ]
     ],
