@@ -9,9 +9,10 @@ import {
   FlatList,
   StatusBar,
   StyleSheet,
-  SafeAreaView,
+  // SafeAreaView, - zastąpiony react-native-safe-area-context
   ActivityIndicator,
 } from "react-native";
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNotes, ApiNote } from "@/context/notes-context";
 
 // interface ApiNote {

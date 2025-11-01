@@ -1,34 +1,48 @@
-import { Stack, router } from "expo-router";
+import { Stack, router, useLocalSearchParams} from "expo-router";
 import React, { useState } from "react";
 import {
     Text,
     View,
     StyleSheet,
-    SafeAreaView,
+    // SafeAreaView, - zastąpiony react-native-safe-area-context
     TextInput,
     Alert,
     Button,
+    ScrollView,
 } from "react-native";
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNotes } from "@/context/notes-context";
 
 export default function AddNoteScreen() {
-    const [title, setTitle] = useState('');
-    const [body, setBody] = useState('');
-    const { addNote } = useNotes();
+    const params = useLocalSearchParams();
+    const isEditMode = params.id != null;
+
+    const noteId = params.id ? String(params.id) : '';
+    const noteTitle = params.title ? String(params.title) : '';
+    const noteBody = params.body ? String(params.body) : '';
+
+    const [title, setTitle] = useState(noteTitle);
+    const [body, setBody] = useState(noteBody);
+    const { addNote, editNote } = useNotes();
 
     const handleSaveNote = () => {
         if (!title.trim() || !body.trim()) {
             Alert.alert('Błąd', 'Proszę wypełnić oba pola przed zapisaniem notatki.');
             return
         }
-        addNote({ title, body });
+        
+        if (isEditMode) {
+            editNote(Number(noteId), title, body);
+        } else {
+            addNote({ title, body });
+        }
         router.back();
     };
 
     return (
         <SafeAreaView style={styles.container}>
             <Stack.Screen options={{
-                title: 'Dodaj Notatkę',
+                title: isEditMode ? 'Edytuj Notatkę' : 'Dodaj Notatkę',
                 headerRight: () => (
                     <Button 
                         onPress={handleSaveNote} 
@@ -38,7 +52,7 @@ export default function AddNoteScreen() {
             }} 
             />
 
-            <View style={styles.content}>
+            <ScrollView contentContainerStyle={styles.content}>
                 <Text style={styles.label}>Tytuł</Text>
                 <TextInput 
                     style={styles.input} 
@@ -50,14 +64,14 @@ export default function AddNoteScreen() {
 
                 <Text style={styles.label}>Treść</Text>
                 <TextInput 
-                    style={[styles.input, styles.textArea]} 
+                    style={[styles.input, styles.textarea]} 
                     placeholder="Wpisz treść notatki" 
                     placeholderTextColor="#888"
                     value={body}
                     onChangeText={setBody}                   
                     multiline
                 />
-            </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
@@ -72,20 +86,20 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 16,
-        fontWeight: 'bold',
+        fontWeight: '500',
         marginTop: 16,
         marginBottom: 8,
     },
     input: {
         backgroundColor: '#ffffff',
-        paddingHorizontal: 12,
+        paddingHorizontal: 16,
         paddingVertical: 8,
         borderRadius: 12,
         fontSize: 16,
         borderWidth: 1,
         borderColor: '#ddd',
     },
-    textArea: {
+    textarea: {
         height: 120,
         textAlignVertical: 'top',
     },
