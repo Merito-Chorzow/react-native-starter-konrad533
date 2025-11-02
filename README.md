@@ -24,9 +24,9 @@ Stwórz podstawową aplikację mobilną w **React Native (React)**, która wykor
 - Zweryfikuj: błędy/edge cases (brak uprawnień, brak internetu).
 
 ## Definition of Done (DoD)
-- [ ] 3–4 kompletne widoki zgodne z opisem.
-- [ ] Użyta co najmniej **1 natywna funkcja**.
-- [ ] Integracja z **API** (co najmniej 1 żądanie).
-- [ ] Czytelny UI + podstawowa dostępność.
-- [ ] Aktualizacja `README.md` z opisem funkcji i sposobem testowania.
-- [ ] Min. 3 logiczne commity.
+- [x] 3–4 kompletne widoki zgodne z opisem.
+- [x] Użyta co najmniej **1 natywna funkcja**.
+- [x] Integracja z **API** (co najmniej 1 żądanie).
+- [x] Czytelny UI + podstawowa dostępność.
+- [x] Aktualizacja `README.md` z opisem funkcji i sposobem testowania.
+- [x] Min. 3 logiczne commity.

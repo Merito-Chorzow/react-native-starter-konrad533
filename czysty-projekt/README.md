@@ -1,50 +1,43 @@
-# Welcome to your Expo app 👋
+# React Native - Field Notes
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Podstawowa aplikacja mobilna "Field Notes" stworzona w React Native przy użyciu Expo wykorzystująca natywną funkcję urządzenia oraz komunikuje się z API.
 
-## Get started
+## Spełnione wymagania funkcjonalności
 
-1. Install dependencies
+Aplikacja implementuje wszystkie kluczowe wymagania:
 
-   ```bash
-   npm install
-   ```
+* **Implementacja Widoków (3):**
+    1.  **Lista Notatek (`app/index.tsx`):** Główny ekran wyświetlający listę wszystkich notatek.
+    2.  **Szczegóły Notatki (`app/note/[id].tsx`):** Ekran dynamiczny, który pokazuje szczegółową treść i tytuł wybranej notatki.
+    3.  **Formularz Dodaj/Edytuj (`app/add-note.tsx`):** Jeden formularz, który obsługuje dwie funkcje: tworzenie nowego wpisu (jeśli wejdzie się z ekranu głównego aplikacji) oraz edytowanie istniejącej notatki (jeśli wejdzie się z ekranu szczegółów).
 
-2. Start the app
+* **Integracja z API (Odczyt)**
+    Przy pierwszym uruchomieniu aplikacja pobiera listę 10 przykładowych notatek z publicznego API `jsonplaceholder.typicode.com/posts`.
 
-   ```bash
-   npx expo start
-   ```
+* **Zarządzanie Stanem (Prosty Store)**
+    Stan aplikacji (lista notatek oraz logika ich modyfikacji) jest zarządzany globalnie przy użyciu **React Context API** (`context/notes-context.tsx`). Kontekst przechowuje pobraną listę i udostępnia funkcje `addNote` oraz `editNote`, co pozwala na natychmiastową aktualizację interfejsu po dokonaniu zmiany.
 
-In the output, you'll find options to open the app in a
+* **Funkcja Natywna** - moduł **`expo-location`**. 
+    
+   1.  **Uzasadnienie wyboru:** Wybrana funkcja natywna (lokalizacja GPS), idealnie pasuje do motywu aplikacji "Field Notes". Pobieranie lokalizacji to kluczowa funkcja dla "Notatek Terenowych" i jest wprost sugerowana w nazwie aplikacji.
+   
+   2.  **Implementacja:** Aplikacja pozwala użytkownikowi na pobranie aktualnej lokalizacji (za zgodą) podczas tworzenia lub edytowania notatki. Po kliknięciu 'Pobierz Lokalizację' pobierane są współrzędne i są one dołączane do treści notatki na samym dole. Konfiguracja uprawnień iOS znajduje się w `app.json`.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Uruchamianie Projektu
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Projekt został stworzony w trybie "Managed Workflow" i jest przeznaczony do uruchamiania w aplikacji w aplikacji mobilnej **Expo Go** na urządzenia iOS.
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+1.  Sklonuj repozytorium.
+2.  W głównym folderze aplikacji przejdź do folderu `czysty-projekt` 
+    ```bash
+    cd czysty-projekt
+    ```
+3.  Zainstaluj zależności:
+    ```bash
+    npm i
+    ```
+4.  Uruchom serwer deweloperski Expo:
+    ```bash
+    npx expo start
+    ```
+5.  Zeskanuj wygenerowany kod QR za pomocą aplikacji Expo Go na swoim urządzeniu mobilnym (iOS).
