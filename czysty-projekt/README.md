@@ -25,7 +25,7 @@ Aplikacja implementuje wszystkie kluczowe wymagania:
 
 ## Uruchamianie Projektu
 
-Projekt został stworzony w trybie "Managed Workflow" i jest przeznaczony do uruchamiania w aplikacji w aplikacji mobilnej **Expo Go** na urządzenia iOS.
+Projekt został stworzony w trybie "Managed Workflow" i jest przeznaczony do uruchamiania w aplikacji mobilnej **Expo Go** na urządzenia iOS.
 
 1.  Sklonuj repozytorium.
 2.  W głównym folderze aplikacji przejdź do folderu `czysty-projekt` 
