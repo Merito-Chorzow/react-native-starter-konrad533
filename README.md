@@ -28,5 +28,5 @@ Stwórz podstawową aplikację mobilną w **React Native (React)**, która wykor
 - [x] Użyta co najmniej **1 natywna funkcja**.
 - [x] Integracja z **API** (co najmniej 1 żądanie).
 - [x] Czytelny UI + podstawowa dostępność.
-- [x] Aktualizacja `README.md` z opisem funkcji i sposobem testowania.
+- [x] Aktualizacja `README.md` z opisem funkcji i sposobem testowania. (README.md projektu jest w folderze głównym aplikacji `czysty-projekt`)
 - [x] Min. 3 logiczne commity.
