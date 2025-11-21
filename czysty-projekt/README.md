@@ -41,3 +41,13 @@ Projekt został stworzony w trybie "Managed Workflow" i jest przeznaczony do uru
     npx expo start
     ```
 5.  Zeskanuj wygenerowany kod QR za pomocą aplikacji Expo Go na swoim urządzeniu mobilnym (iOS).
+
+## Galeria
+
+![Główny ekran](img/main.PNG)
+
+![Nowa notatka](img/new-note.PNG)
+
+![Edytowanie notatki](img/edit-note.PNG)
+
+![Szczegóły notatki](img/details.PNG)
