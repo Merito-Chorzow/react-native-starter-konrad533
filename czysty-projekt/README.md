@@ -44,11 +44,14 @@ Projekt został stworzony w trybie "Managed Workflow" i jest przeznaczony do uru
 
 ## Galeria
 
-![Główny ekran](img/main.PNG)
+<!-- ![Główny ekran](img/main.PNG) -->
 <img src="img/main.PNG" width="400" />
 
-![Nowa notatka](img/new-note.PNG)
+<!-- ![Nowa notatka](img/new-note.PNG) -->
+<img src="img/new-note.PNG" width="400" />
 
-![Edytowanie notatki](img/edit-note.PNG)
+<!-- ![Edytowanie notatki](img/edit-note.PNG) -->
+<img src="img/edit-note.PNG" width="400" />
 
-![Szczegóły notatki](img/details.PNG)
+<!-- ![Szczegóły notatki](img/details.PNG) -->
+<img src="img/details.PNG" width="400" />
