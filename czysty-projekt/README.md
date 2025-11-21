@@ -45,6 +45,7 @@ Projekt został stworzony w trybie "Managed Workflow" i jest przeznaczony do uru
 ## Galeria
 
 ![Główny ekran](img/main.PNG)
+<img src="img/main.PNG" width="400" />
 
 ![Nowa notatka](img/new-note.PNG)
 
