@@ -44,18 +44,6 @@ Projekt został stworzony w trybie "Managed Workflow" i jest przeznaczony do uru
 
 ## Galeria
 
-1. Ekran główny aplikacji
-<!-- ![Główny ekran](img/main.PNG) -->
-<img src="img/main.PNG" width="400" />
-
-2. Widok dodawania nowych notatek
-<!-- ![Nowa notatka](img/new-note.PNG) -->
-<img src="img/new-note.PNG" width="400" />
-
-3. Widok edytowania istniejących notatek
-<!-- ![Edytowanie notatki](img/edit-note.PNG) -->
-<img src="img/edit-note.PNG" width="400" />
-
-4. Szczegóły istniejących notatek
-<!-- ![Szczegóły notatki](img/details.PNG) -->
-<img src="img/details.PNG" width="400" />
+| Ekran Główny | Dodawanie | Edycja | Szczegóły |
+|:------------:|:---------:|:------:|:---------:|
+| <img src="img/main.PNG" width="200" /> | <img src="img/new-note.PNG" width="200" /> | <img src="img/edit-note.PNG" width="200" /> | <img src="img/details.PNG" width="200" /> |
