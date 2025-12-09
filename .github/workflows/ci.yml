@@ -22,7 +22,7 @@ jobs:
 
       # 3. Instalacja zależności 
       - name: Install dependencies
-        run: npm install
+        run: cd czysty-projekt; npm install
 
       # 4. Uruchomienie testów
       - name: Run Tests
