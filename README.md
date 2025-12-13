@@ -9,7 +9,7 @@ Stwórz podstawową aplikację mobilną w **React Native (React)**, która wykor
 ## Zakres i wymagania funkcjonalne
 - **Natywna funkcja (min. 1):** wybierz i uzasadnij (np. aparat/kamera, lokalizacja GPS, wibracje/haptics, pliki/galeria).
 - **API (min. 1 endpoint):** odczyt lub zapis danych (publiczne lub własne/mock).
-- **Widoki (3–4):**aa
+- **Widoki (3–4):**
   1. **Lista notatek** (tytuł, data, miniaturka/znacznik lokalizacji).
   2. **Szczegóły notatki** (opis, zdjęcie/pozycja, akcje).
   3. **Dodaj/Edytuj** (formularz: tytuł, opis, dodaj zdjęcie **lub** pobierz lokalizację).
